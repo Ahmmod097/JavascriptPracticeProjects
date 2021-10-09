@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Expense tracker</title>
+<style>
+    .center {
+margin: auto;
+width: 40%;
+
+padding: 1px;
+}
+
+.green{
+    
+    color: green;
+    font-size:160%;
+}
+table, th, td {
+  border: 1px solid black;
+  padding: 5px;
+}
+table {
+  border-spacing: 15px;
+}
+</style>
+</head>
+<body>
+<div class="center">
+    <h1>Expense Tracker</h1>
+    <p class ="green">Add a new item</p>
+    
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" ><br>
+        <br>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" >
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" >
+        <br><br>
+        <button id="1" onclick=myFunc()>Submit</button><br>
+        <br>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name </th>
+                    <th>Date </th>
+                    <th>Amount </th>
+                </tr>
+            </thead>
+            <tbody id="input">
+                
+                
+            </tbody>
+        </table>
+        <p id="demo"></p>
+
+      
+</div>
+
+<script>
+    let arr = [];
+    let flag = 0;
+    let table = document.getElementById("input");
+    /*let table = "<table>"+
+            "<thead>"+
+                "<tr>"+
+                    "<th>"+ "Name"+"</th>"+
+                    "<th>"+ "Date"+"</th>"+   
+                    "<th>"+ "Amount"+"</th>"+
+                "</tr>"+
+            "</thead>"+
+            "<tbody>";*/
+    function myFunc(){
+        let a = document.getElementById("name").value;
+        let b = document.getElementById("date").value;
+        let c = document.getElementById("amount").value;
+        if(flag == 1){
+            a = "";
+            b = "";
+            c = "";
+        }
+        
+        if(a!==""){
+            arr.push(a);
+        }
+        
+        if(a!==""){
+            arr.push(b);
+        }
+        
+        if(a!==""){
+            arr.push(c);
+        }
+        
+        let tableData = "";
+        //console.log(arr.length);
+        if(arr.length==0){
+            document.getElementById("input").innerHTML = "";
+            
+            document.getElementById("input").innerHTML = "<tr>"+"<td>"+"<b>No Expenses Added Yet!!</b>"+ "</td>"+"</tr>";
+        }
+        else{ 
+
+            for (let i=0;i<arr.length;i+=3){
+                tableData+="<tr>"+
+                    "<td>"+arr[i]+"</td>"+" "+
+                    "<td>"+arr[i+1]+"</td>"+" "+" "+
+                    "<td>"+"$"+arr[i+2]+"</td>"+" "+
+                    "<td>"+"<button id=" +i+" "+"onclick=delElem(id)>X</button>"+"</td>"+
+                "</tr>";
+                
+                
+            }
+                
+            //tableData = tableData+"</tbody>"+"</table>";
+            //tableData = table + tableData;
+            //console.log(tableData);
+           
+            document.getElementById("input").innerHTML = tableData;
+            
+    }
+        console.log(flag);
+        flag = 0;            
+    }
+
+    function delElem(id){
+        flag = 1;
+        let arr1 = [];
+        id = parseInt(id);
+        for(let i=0;i<arr.length;i++){
+            if(i!==id && i!==id+1 && i!==id+2){
+                arr1.push(arr[i]);
+            }
+        }
+        console.log(arr1);
+        while(arr.length>0){
+            arr.pop();
+        }
+        for(let i=0;i<arr1.length;i++){
+            arr.push(arr1[i]);
+        }
+        console.log(arr);
+        myFunc();
+    }
+    
+
+</script>
+
+</body>
+</html>
