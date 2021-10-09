@@ -1,2 +1,2 @@
-Expense Tracker/* linguist-documentation=false
 Expense Tracker/* linguist-vendored
+Expense Tracker/*.js linguist-vendored=false
